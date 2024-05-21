@@ -1,4 +1,6 @@
 import { Schema, model } from "mongoose";
+import bcrypt from "bcrypt";
+
 
 const ProviderSchema = new Schema({
   providerName: { type: String, required: true },
