@@ -4,8 +4,8 @@ import bcrypt from "bcrypt";
 
 const ProviderSchema = new Schema({
   providerName: { type: String, required: true },
-  password: { type: String, required: true },
-  email: { type: String, required: true },
+  password: { type: String },
+  email: { type: String },
   providerNumber: Number,
   providerAddress: String,
   serviceName: String,

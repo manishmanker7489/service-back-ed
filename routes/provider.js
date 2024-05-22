@@ -1,19 +1,26 @@
 import { authProvider } from '../middleware/auth.js'
 import express from "express";
+import Provider from '../models/Provider.js';
 
-import Provider from '../models/Provider.js'
 
 const router = express.Router();
 
-router.post("/serch-service" , authUser , async (req, res) => {
-    const serviceName  = req.body.serviceName;
-    const provider = await Provider.find({serviceName:serviceName})
+router.post("/edit-info", async (req, res) => {
+    let resData = req.body;
+    let id = req.body.id;
 
-    const providerList = provider.map((item)=> {
-        delete item.password;
-    } )
+    const newData = await Provider.findByIdAndUpdate(id, {
+        providerName: resData.providerName,
+        providerNumber: resData.providerNumber,
+        providerAddress: resData.providerAddress,
+        serviceName: resData.serviceName,
+        rating: 0,
+        noOfRating: 0,
+        minPrice: resData.minPrice,
+        maxPrice: resData.maxPrice,
+    },{new:true});
 
-    res.send({providerList});
+    res.send({ data: newData });
 });
 
 export default router
